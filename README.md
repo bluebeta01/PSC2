@@ -31,7 +31,7 @@ Once the configuration is done, you're now ready configure your client machines 
 At this point, your machines should now be executing the jobrunner.ps1 script and are ready to execute jobs. This framework comes with an example of a job called log_pcinfo which should start running immediatly. This will provide a simple santiy check to demonstrate that the framwork is working. You should be able to naviagte to $JOB_TRACKING_DIR/log_pcinfo.ps1/ and see that there are files there corresponding to the hostnames of your client machines. If you've deployed the framework and are sure that jobrunner.ps1 is running and don't see this directory, something isn't configured correctly. If something isn't right, you can always run jobrunner.ps1 in a live powershell window to see any erors that it's encountering.
 
 ### Deploying Jobs
-Jobs are just powershell scripts located in the "jobs" folder of the PSC2 root directory. A job should be placed in a folder of the same name. For example, a job called "get_windows_version" should be located at <PSC2 root directory>/jobs/get_windows_version/get_windows_version.ps1. It is best practice not to use whitespace in the name of your jobs, as this can cause issues when accessing directories.
+Jobs are just powershell scripts located in the "jobs" folder of the PSC2 root directory. A job should be placed in a folder of the same name. For example, a job called "get_windows_version" should be located at \<PSC2 root directory>/jobs/get_windows_version/get_windows_version.ps1. It is best practice not to use whitespace in the name of your jobs, as this can cause issues when accessing directories.
   
 Once a job file has be placed in its directory, all clients will start executing it the next time they check for jobs to run. You can prevent a job from running by appending a ".disabled" to the name of job script file.
   
@@ -42,10 +42,10 @@ You should refer to the example job called log_pcinfo included with this framewo
 This script defines several configuration varaibles that are used by the framework when executing jobs. This file should be edited accordingly when setting up the framework. You can find a description of every variable in that script. Varaibles referenced in this documentation come from this config file.
 
 ### mark_success.ps1
-This script should be called at the end of a job when the job has completed without errors. This script will create a file called $JOB_TRACKING_DIR/<jobname>/<hostname>. This file is used to track the last time the job ran successfully on the host machine.
+This script should be called at the end of a job when the job has completed without errors. This script will create a file called $JOB_TRACKING_DIR/\<jobname>/\<hostname>. This file is used to track the last time the job ran successfully on the host machine.
 
 ### should_run.ps1
 This script is one of the first things envoked by a job script and is used to determined if the job should run. It returns $true if the job should run or $false if it should not. The script does this by taking in a frequency paramter indicating how many minutes the job should wait between executions. When envoked, the script will measure how long it has been since this job ran on this host by checking the last modified property of the file created by mark_success.ps1. If this file does not exist or is older that the frequency parameter, the script will return $true, otherwise it returns $false.
   
 ### storage.ps1
-This script provides function for storing and retreiving key-value pairs. Keys are always strings and point to powershell objects. When a job creates a key, stored in a file called $JOB_STORAGE_DIR/<jobname>/<hostname>-<keyname>, for example "$JOB_STORAGE_DIR/testjob/johnpc-mykey".
+This script provides function for storing and retreiving key-value pairs. Keys are always strings and point to powershell objects. When a job creates a key, stored in a file called $JOB_STORAGE_DIR/\<jobname>/\<hostname>-\<keyname>, for example "$JOB_STORAGE_DIR/testjob/johnpc-mykey".
