@@ -5,14 +5,14 @@ Param(
     [string]$root
 )
 
-. $root/config.ps1
-
 while($true)
 {
 	if ([System.IO.File]::Exists($root + "/KILLSWITCH"))
 	{
 		Exit -1
 	}
+
+    . $root/config.ps1
 	
 	powershell $root/runjobs.ps1
 	
