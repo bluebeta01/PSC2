@@ -1,5 +1,14 @@
+<#
+This file provies the storage API functions to be called from within job scripts
+#>
+
+
 function Get-KeyExists
 {
+    <#
+    .Description
+    Returns a bool indicating whether or not the provided key exists
+    #>
     param(
     [Parameter(Mandatory=$true)]
     [string]$jobname,
@@ -21,6 +30,10 @@ function Get-KeyExists
 
 function Set-Key
 {
+    <#
+    .Description
+    Sets a key to a given object. May throw an exception if the key cannot be created
+    #>
     param(
     [Parameter(Mandatory=$true)]
     [string]$jobname,

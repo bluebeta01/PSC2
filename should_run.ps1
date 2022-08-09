@@ -1,28 +1,28 @@
-#This script is used to determine if a job should run. It should be called by
-#the job script when the job script is envoked. This script will return true if
-#the job should run and false if it should not. Usage listed below.
-#
-# should_run.ps1 -jobname <jobname> -hostname <hostname> -frequency <frequency>
-#
-# -jobname is a name to uniquly identify this job
-#
-# -hostname is the hostname of the machine running the job
-#
-# -frequency is how often the job should be run in minutes. The script will ensure
-#that at least <frequency> minutes have passed since the last time the script was run.
-#Setting this option to 0 means this script always return true and the job will run
-#every time it is envoked. If the parameter is not supplied, it default to Int32.MaxValue
+<#
+This script is used to determine if a job should run. It should be called by
+the job script when the job script is envoked. This script will return true if
+the job should run and false if it should not. Usage listed below.
+
+The frequency parameter is how often the job should be run in minutes. The script
+will ensure that at least <frequency> minutes have passed since the last time the
+job was run. Setting this option to 0 means this script always return true. If
+the parameter is not supplied, it defaults to Int32.MaxValue
+#>
 
 Param(
+    #The name of the job being run
     [Parameter(Mandatory=$true)]
     [string]$jobname,
 	
+    #The hostname of the client running the job
 	[Parameter(Mandatory=$true)]
     [string]$hostname,
 	
+    #The PSC2 root
 	[Parameter(Mandatory=$true)]
     [string]$root,
 	
+    #How often the job should run in minutes
     [int]$frequency = [System.Int32]::MaxValue
 )
 

@@ -1,4 +1,10 @@
+<#
+This script should be called periodically by the client to run any jobs
+that are available to be run
+#>
+
 Param(
+    #The PSC2 root
     [Parameter(Mandatory=$true)]
     [string]$root
 )
