@@ -14,7 +14,7 @@ while($true)
 
     . $root/config.ps1
 	
-	powershell $root/runjobs.ps1
+	powershell $root/runjobs.ps1 -root $root
 	
 	Start-Sleep -Seconds $SLEEP_INTERVAL
 }
